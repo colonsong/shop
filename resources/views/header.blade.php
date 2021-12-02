@@ -17,6 +17,11 @@
                     <div id="top-account">
                         @auth
                             <i class="icon-line2-user me-1 position-relative" style="top: 1px;"></i>{{ auth()->user()->name }}
+                            |
+                            <form class="d-sm-inline" method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Logout</button>
+                            </form>
                         @endauth
                         @guest
                             <a href="#modal-register" data-lightbox="inline" ><i class="icon-line2-user me-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary fw-medium">Login</span></a>
