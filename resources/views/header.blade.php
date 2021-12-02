@@ -15,7 +15,13 @@
                     <!-- Top Search
                     ============================================= -->
                     <div id="top-account">
-                        <a href="#modal-register" data-lightbox="inline" ><i class="icon-line2-user me-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary fw-medium">Login</span></a>
+                        @auth
+                            <i class="icon-line2-user me-1 position-relative" style="top: 1px;"></i>{{ auth()->user()->name }}
+                        @endauth
+                        @guest
+                            <a href="#modal-register" data-lightbox="inline" ><i class="icon-line2-user me-1 position-relative" style="top: 1px;"></i><span class="d-none d-sm-inline-block font-primary fw-medium">Login</span></a>
+                        @endguest
+
                     </div><!-- #top-search end -->
 
                     <!-- Top Cart
