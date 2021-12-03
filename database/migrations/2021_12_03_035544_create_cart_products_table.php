@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderProductsTable extends Migration
+class CreateCartProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateOrderProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_products', function (Blueprint $table) {
+        Schema::create('cart_products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('order_id')->index();
-            $table->foreign("order_id")->references("id")->on("orders")->cascadeOnDelete();
+            $table->unsignedBigInteger('cart_id')->index();
+            $table->foreign("cart_id")->references("id")->on("carts")->cascadeOnDelete();
             $table->unsignedBigInteger('product_id')->index();
             $table->foreign("product_id")->references("id")->on("products")->cascadeOnDelete();
             $table->unsignedBigInteger('qty')->default(1);
@@ -32,10 +32,10 @@ class CreateOrderProductsTable extends Migration
      */
     public function down()
     {
-        // Schema::table('order_products', function(Blueprint $table) {
+        // Schema::table('cart_products', function(Blueprint $table) {
         //     $table->dropForeign(['product_id']);
-        //     $table->dropForeign(['order_id']);
+        //     $table->dropForeign(['cart_id']);
         // });
-        Schema::dropIfExists('order_products');
+        Schema::dropIfExists('cart_products');
     }
 }
