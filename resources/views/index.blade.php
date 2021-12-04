@@ -30,6 +30,7 @@
 	<!-- Document Title
 	============================================= -->
 	<title>Shop Demo | Canvas</title>
+    @livewireStyles
 
 </head>
 
@@ -66,7 +67,7 @@
 		</div>
 
 		<!-- Login Modal -->
-		@include('login');
+		@include('login')
 
 		<!-- Top Bar
 		============================================= -->
@@ -152,6 +153,6 @@
 	<script>
 
 	</script>
-
+    @livewireScripts
 </body>
 </html>

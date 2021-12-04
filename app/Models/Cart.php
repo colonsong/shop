@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product;
 
 class Cart extends Model
 {
@@ -12,7 +13,7 @@ class Cart extends Model
     protected $fillable = ['user_id'];
 
     public function products() {
-        return $this->belongsToMany(Products::class)->withTimestamps()->withPivot('qty');
+        return $this->belongsToMany(Product::class)->withTimestamps()->withPivot('qty');
     }
 
     public function getSumAttribute() {

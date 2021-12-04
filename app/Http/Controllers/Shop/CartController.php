@@ -14,20 +14,6 @@ class CartController extends Controller
         $this->middleware('auth');
     }
 
-    public function addItem($productId) {
-        $cart = Cart::where('user_id', Auth::user()->id)->first();
 
-        if (!$cart) {
-            $cart = new Cart;
-            $cart->user_id = Auth::user()->id;
-        }
-
-        $cartProduct = new CartProduct;
-        $cartProduct->product_id = $productId;
-        $cartProduct->cart_id = $cart->id;
-        $cartProduct->save();
-
-        return $cart;
-    }
 
 }

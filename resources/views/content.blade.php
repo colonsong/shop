@@ -69,6 +69,8 @@
 
             <!-- Shop Item 1
             ============================================= -->
+
+            @endphp
             @foreach ($products as $product)
 
             <div class="oc-item">
@@ -78,10 +80,7 @@
                         <a href="#"><img src="demos/shop/images/items/featured/1-1.jpg" alt="Round Neck T-shirts"></a>
                         <div class="sale-flash badge bg-danger p-2">Sale!</div>
                         <div class="bg-overlay">
-                            <div class="bg-overlay-content align-items-end justify-content-between" data-hover-animate="fadeIn" data-hover-speed="400">
-                                <a href="#" class="btn btn-dark me-2"><i class="icon-shopping-basket"></i></a>
-                                <a href="demos/shop/ajax/shop-item.html" class="btn btn-dark" data-lightbox="ajax"><i class="icon-line-expand"></i></a>
-                            </div>
+                            @livewire('shop.oc-product', ['product' => $product], key($product->id))
                             <div class="bg-overlay-bg bg-transparent"></div>
                         </div>
                     </div>
