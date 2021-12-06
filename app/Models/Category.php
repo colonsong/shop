@@ -18,4 +18,8 @@ class Category extends Model
         parent::__construct($attributes);
 
     }
+
+    public function products() {
+        return $this->belongsToMany(Product::class)->withTimestamps();
+    }
 }

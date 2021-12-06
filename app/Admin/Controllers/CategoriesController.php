@@ -70,12 +70,14 @@ class CategoriesController extends AdminController
     protected function form()
     {
         $form = new Form(new Category());
-        $form->number('parent_id', __('PID'));
-        $form->text('title', __('Name'));
+        $categories = Category::all()->pluck('title','id');
+        $categories->prepend('root', '0');
 
+        $form->select('parent_id','PID')->options($categories);
+        $form->text('title', __('Name'));
         $form->textarea('description', __('description'));
 
-        $form->number('order', __('sort'));
+        $form->number('order', __('sort'))->default(0);
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -27,6 +28,14 @@ class ProductController extends AdminController
         $grid = new Grid(new Product());
 
         $grid->column('id', __('Id'));
+        $grid->categories()->display(function ($category) {
+
+            $category = array_map(function ($category) {
+                return "<span class='label label-success'>{$category['title']}</span>";
+            }, $category);
+
+            return join('&nbsp;', $category);
+        });
         $grid->column('name', __('Name'));
         $grid->column('pic', __('Pic'));
         $grid->column('content', __('Content'));
@@ -50,6 +59,7 @@ class ProductController extends AdminController
         $show = new Show(Product::findOrFail($id));
 
         $show->field('id', __('Id'));
+
         $show->field('name', __('Name'));
         $show->field('pic', __('Pic'));
         $show->field('content', __('Content'));
@@ -70,7 +80,7 @@ class ProductController extends AdminController
     protected function form()
     {
         $form = new Form(new Product());
-
+        $form->multipleSelect('categories','Category')->options(Category::all()->pluck('title','id'));
         $form->text('name', __('Name'));
         $form->image('pic', __('Pic'));
         $form->textarea('content', __('Content'));
