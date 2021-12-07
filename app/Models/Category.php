@@ -19,6 +19,12 @@ class Category extends Model
 
     }
 
+    public static function getTree() {
+        return (new static)->toTree();
+    }
+
+
+
     public function products() {
         return $this->belongsToMany(Product::class)->withTimestamps();
     }
