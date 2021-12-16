@@ -14,6 +14,12 @@ class CartController extends Controller
         $this->middleware('auth');
     }
 
+    public function index() {
+
+
+        return view('cart-page');
+    }
+
 
 
 }

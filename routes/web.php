@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Shop\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Shop\IndexController;
 
@@ -15,6 +16,8 @@ use App\Http\Controllers\Shop\IndexController;
 */
 
 Route::get('/', [IndexController::class, 'home']);
+
+Route::get('/cart', [CartController::class, 'index'])->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

@@ -15,14 +15,18 @@ class TopCartProducts extends Component
     protected $listeners = ['addProduct'];
 
     public function mount() {
-        $cart = Cart::where('user_id', Auth::user()->id)->first();
-        if (!$cart) {
-            Log::debug('! cart');
-            $cart = new Cart;
-            $cart->user_id = Auth::user()->id;
-            $cart->save();
+
+        if (Auth::check()) {
+            $cart = Cart::where('user_id', Auth::user()->id)->first();
+
+            if (empty($cart)) {
+                Log::debug('! cart');
+                $cart = new Cart;
+                $cart->user_id = Auth::user()->id;
+                $cart->save();
+            }
+            $this->cart = $cart;
         }
-        $this->cart = $cart;
 
     }
 
@@ -40,7 +44,7 @@ class TopCartProducts extends Component
             $cart->user_id = Auth::user()->id;
             $cart->save();
         }
-        Log::debug($cart);
+
         $cart->products()->attach($productId, ['qty' => 2]);
         $cartProduct = new CartProduct;
         // $cartProduct->product_id = $productId;

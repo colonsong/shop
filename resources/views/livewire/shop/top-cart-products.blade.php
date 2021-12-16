@@ -5,7 +5,7 @@
 
     <div class="top-cart-items">
 
-
+        @if (!empty($cart))
         @foreach ($cart->products()->get() as $product)
         <div class="top-cart-item">
             <div class="top-cart-item-image">
@@ -20,9 +20,10 @@
             </div>
         </div>
         @endforeach
+        @endif
     </div>
     <div class="top-cart-action">
         <span class="top-checkout-price">$114.95</span>
-        <a href="#" class="button button-3d button-small m-0">View Cart</a>
+        <a href="/cart" class="button button-3d button-small m-0">View Cart</a>
     </div>
 </div>
