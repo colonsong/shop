@@ -25,7 +25,18 @@ class ProductController extends AdminController
      */
     protected function grid()
     {
+
+
+
         $grid = new Grid(new Product());
+
+        $grid->quickCreate(function (Grid\Tools\QuickCreate $create) {
+            $create->text('name', 'name');
+            $create->text('pic', 'pic');
+            $create->text('content', 'content');
+            $create->datetime('sell_at', 'sell_at');
+            $create->text('enabled', 'enabled');
+        });
 
         $grid->column('id', __('Id'));
         $grid->categories()->display(function ($category) {
@@ -41,10 +52,34 @@ class ProductController extends AdminController
         $grid->column('content', __('Content'));
         $grid->column('price', __('Price'));
         $grid->column('sell_at', __('Sell at'));
-        $grid->column('enabled', __('Enabled'));
+
+
+
+        $states = [
+        'on'  => ['value' => 1, 'text' => 'OPEN', 'color' => 'primary'],
+        'off' => ['value' => 0, 'text' => 'CLOSE', 'color' => 'default'],
+        ];
+        $grid->column('enabled')->switch($states);
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
+
+        $grid->filter(function($filter){
+
+            // 去掉默认的id过滤器
+            $filter->disableIdFilter();
+            $filter->between('price', 'price');
+            // 在这里添加字段过滤器
+            $filter->like('name', 'name');
+            $filter->like('content', 'content');
+
+
+            // 多条件查询
+            $filter->between('sell_at', '賣出日期')->datetime();
+
+        });
+
+        $grid->expandFilter();
         return $grid;
     }
 
@@ -62,6 +97,7 @@ class ProductController extends AdminController
 
         $show->field('name', __('Name'));
         $show->field('pic', __('Pic'));
+
         $show->field('content', __('Content'));
         $show->field('price', __('Price'));
         $show->field('sell_at', __('Sell at'));
@@ -83,10 +119,15 @@ class ProductController extends AdminController
         $form->multipleSelect('categories','Category')->options(Category::all()->pluck('title','id'));
         $form->text('name', __('Name'));
         $form->image('pic', __('Pic'));
-        $form->textarea('content', __('Content'));
+       // $form->textarea('content', __('Content'));
         $form->number('price', __('Price'));
         $form->datetime('sell_at', __('Sell at'))->default(date('Y-m-d H:i:s'));
         $form->switch('enabled', __('Enabled'))->default(1);
+
+
+        $form->ckeditor('content', __('Content'));
+
+
 
         return $form;
     }
