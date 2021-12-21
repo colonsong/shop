@@ -16,8 +16,16 @@ class CartController extends Controller
 
     public function index() {
 
+        $cart = Cart::where('user_id', Auth::user()->id)->first();
+        if (!$cart) {
 
-        return view('cart-page');
+            $cart = new Cart;
+            $cart->user_id = Auth::user()->id;
+            $cart->save();
+        }
+        $this->cart = $cart;
+
+        return view('cart-page', compact('cart'));
     }
 
 

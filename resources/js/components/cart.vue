@@ -1,6 +1,9 @@
+<template>
+
 <section id="content">
     <div class="content-wrap">
         <div class="container">
+
 
             <table class="table cart mb-5">
                 <thead>
@@ -14,8 +17,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($cart->products()->get() as $product)
-                    <tr class="cart_item">
+
+                    <tr v-for="(product, index) in products" :key="product.id" class="cart_item">
+
                         <td class="cart-product-remove">
                             <a href="#" class="remove" title="Remove this item"><i class="icon-trash2"></i></a>
                         </td>
@@ -25,26 +29,26 @@
                         </td>
 
                         <td class="cart-product-name">
-                            <a href="#">{{ $product->name}}</a>
+                            <a href="#">{{ product.name}}</a>
                         </td>
 
                         <td class="cart-product-price">
-                            <span class="amount">${{ $product->price}}</span>
+                            <span class="amount">{{ product.price}}</span>
                         </td>
 
                         <td class="cart-product-quantity">
                             <div class="quantity">
                                 <input type="button" value="-" class="minus">
-                                <input type="text" name="quantity" value="{{ $product->pivot->qty}}" class="qty" />
+                                <input type="text" name="quantity" :value="product['pivot'].qty" class="qty" />
                                 <input type="button" value="+" class="plus">
                             </div>
                         </td>
 
                         <td class="cart-product-subtotal">
-                            <span class="amount">${{ $product->price * $product->pivot->qty}}</span>
+                            <span class="amount">{{ product.price * product['pivot'].qty }}</span>
                         </td>
                     </tr>
-                    @endforeach
+
 
                     <tr class="cart_item">
                         <td colspan="6">
@@ -61,7 +65,7 @@
                                 </div>
                                 <div class="col-lg-auto pe-lg-0">
                                     <a href="#" class="button button-3d m-0">Update Cart</a>
-                                    <a href="shop.html" class="button button-3d mt-2 mt-sm-0 me-0">Proceed to Checkout</a>
+                                    <button  class="button button-3d mt-2 mt-sm-0 me-0" v-on:click="checkout">Proceed to Checkout</button>
                                 </div>
                             </div>
                         </td>
@@ -379,3 +383,44 @@
         </div>
     </div>
 </section><!-- #content end -->
+
+</template>
+
+<script>
+
+
+
+    export default {
+        mounted() {
+            console.log('Component mounted.')
+        },
+        props: {
+            products: {
+                type: Array
+            },
+            cartId:{
+                type: Number
+
+            }
+        },
+        data() {
+            return {
+              name: '',
+              description: '',
+              output: ''
+            };
+        },
+        methods: {
+                checkout: function () {
+                    let vm = this;
+                    axios.post('/api/user/checkout',{
+                        cart_id: vm.cartId,
+
+                    })
+                    .then( (response) => console.log(response))
+                    .catch( (error) => console.log(error))
+                }
+
+            }
+    }
+</script>

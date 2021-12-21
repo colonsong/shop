@@ -32,6 +32,7 @@
 	<title>Shop Demo | Canvas</title>
     @livewireStyles
 
+
 </head>
 
 <body class="stretched">
@@ -154,5 +155,7 @@
 
 	</script>
     @livewireScripts
+
+
 </body>
 </html>

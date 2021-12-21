@@ -21,7 +21,6 @@
 	<!-- Document Title
 	============================================= -->
 	<title>Cart | Canvas</title>
-    @livewireStyles
 </head>
 
 <body class="stretched">
@@ -1495,9 +1494,13 @@
 
 		<!-- Content
 		============================================= -->
-        <livewire:shop.cart-page />
 
 
+
+
+        <div id="app">
+            <cart-component :products='@json($cart->products()->get())' :cart-id="{{ $cart->id }}" />
+        </div>
 		<!-- Footer
 		============================================= -->
 		<footer id="footer" class="dark">
@@ -1759,6 +1762,7 @@
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="js/functions.js"></script>
-    @livewireScripts
+    <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>
