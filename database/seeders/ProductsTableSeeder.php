@@ -24,6 +24,6 @@ class ProductsTableSeeder extends Seeder
         //     'enabled' => true,
         // ]);
 
-        Product::factory()->count(10)->create(); 
+        Product::factory()->count(10)->create();
     }
 }

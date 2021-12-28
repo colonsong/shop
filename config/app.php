@@ -232,6 +232,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'Cart' => App\Facades\Cart::class,
+        'Cashier' => App\Facades\Cashier::class,
+
+
     ],
 
 ];

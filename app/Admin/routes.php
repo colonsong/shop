@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Routing\Router;
 
+use Illuminate\Routing\Router;
+use App\Admin\Controllers\CategoriesController;
+use App\Admin\Controllers\ProductController;
 Admin::routes();
 
 Route::group([
@@ -12,7 +14,7 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index')->name('home');
-    $router->resource('products', ProductController::class);
-    $router->resource('categories', CategoriesController::class);
-    $router->resource('category-products', CategoryProductController::class);
+    //$router->resource('products', ProductController::class);
+   // $router->resource('categories', CategoriesController::class);
+    //$router->resource('category-products', CategoryProductController::class);
 });
