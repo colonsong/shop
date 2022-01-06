@@ -6,11 +6,20 @@ use App\Facades\Cart;
 use App\Facades\Cashier;
 use App\Models\BuyProduct;
 use App\Models\Order;
+use App\Servicies\Payment\Payment;
+use App\Servicies\Payment\PaymentFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+
+    public function __construct() {
+
+
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +38,7 @@ class OrderController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -37,7 +47,7 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, PaymentFactory $paymentFactory)
     {
 
         $couponId = $request->input('coupon_id');
@@ -69,11 +79,8 @@ class OrderController extends Controller
         });
 
         $order->buyProducts()->saveMany($buyProducts->all());
-
-
-
-        // factory method
-        //Payment::withPayment('ezPay')->usePaymentType('VISA')->checkout($options = []);
+        $payment = $paymentFactory->create($request->input('paymentMethod'));
+        $payment->pay($options = []);
     }
 
     /**
@@ -85,6 +92,7 @@ class OrderController extends Controller
     public function show($id)
     {
         //
+        dd(Auth::user());
     }
 
     /**
@@ -96,6 +104,7 @@ class OrderController extends Controller
     public function edit($id)
     {
         //
+        dd(Auth::user());
     }
 
     /**
@@ -108,6 +117,7 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         //
+        dd(Auth::user());
     }
 
     /**

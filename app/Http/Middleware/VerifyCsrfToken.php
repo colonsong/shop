@@ -12,6 +12,10 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'payment/ecpay/receive',
+        'ecpay/transport/receive',
+        'ecpay/transport/map/receive',
+        'ecpay/transport/express/create',
+        'ecpay/transport/test/receive',
     ];
 }
