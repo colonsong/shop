@@ -13,11 +13,11 @@
                                 @if (isset($category['children']))
                                 @foreach ($category['children'] as $subcategory)
 
-                                <li class="menu-item mega-menu-title"><a class="menu-link" href="#"><div>{{ $subcategory['title'] }}</div></a>
+                                <li class="menu-item mega-menu-title"><a class="menu-link" href="{{ route('category.products', ['category' => $subcategory['id'] ]) }}"><div>{{ $subcategory['title'] }}</div></a>
                                     <ul class="sub-menu-container">
                                         @if (isset($subcategory['children']))
                                             @foreach ($subcategory['children'] as $bottomcategory)
-                                                <li class="menu-item"><a class="menu-link" href="#"><div>{{ $bottomcategory['title'] }}</div></a></li>
+                                                <li class="menu-item"><a class="menu-link" href="{{ route('category.products', ['category' => $bottomcategory['id'] ]) }}"><div>{{ $bottomcategory['title'] }}</div></a></li>
                                             @endforeach
                                         @endif
                                     </ul>

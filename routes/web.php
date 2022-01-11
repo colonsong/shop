@@ -21,6 +21,9 @@ use GuzzleHttp\Client;
 */
 
 Route::get('/', [IndexController::class, 'home'])->name('home');
+Route::get('/categories/{category}/products/', [IndexController::class, 'categroyProducts'])->name('category.products');
+
+
 Route::post('/payment/ecpay/receive', [EcPayController::class, 'callback'])->name('payment.callback');
 Route::post('/ecpay/transport/test/receive', [EcPayController::class, 'transportTestCallback']);
 Route::post('/ecpay/transport/map/receive', [EcPayController::class, 'transportMapCallback']);
