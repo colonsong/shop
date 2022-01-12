@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
-//testmatertest
+//testmatertest2
 class IndexController extends Controller
 {
 
